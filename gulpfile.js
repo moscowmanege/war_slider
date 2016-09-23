@@ -36,6 +36,12 @@ var paths = {
 };
 
 
+// vars Block
+
+
+var Production = false;
+
+
 // Loggers Block
 
 
@@ -64,6 +70,11 @@ var getJsonData = function(file) {
 // Tasks Block
 
 
+gulp.task('production', function(callback) {
+	Production = true;
+	callback();
+});
+
 gulp.task('clean', function(callback) {
 	return rimraf('build/**', callback);
 });
@@ -75,8 +86,9 @@ gulp.task('jade', function() {
 				var jsonFile = file; // We create this 'jsonFile' variable because the 'file' variable is overwritten on the next gulp.src.
 				var jsonBasename = path.basename(jsonFile.path, path.extname(jsonFile.path));
 				return gulp.src(paths.html.src)
+					.pipe(plumber(error_logger))
 					.pipe(data(getJsonData(jsonFile)))
-					.pipe(jade({ pretty: true }))
+					.pipe(jade({ pretty: !Production }))
 					.pipe(rename(function(htmlFile) {
 						htmlFile.basename = jsonBasename;
 					}))
@@ -88,10 +100,10 @@ gulp.task('jade', function() {
 gulp.task('stylus', function() {
 	return gulp.src(paths.stylus.src)
 		.pipe(plumber(error_logger))
-		.pipe(stylus({ compress: true }))
+		.pipe(stylus({ compress: Production }))
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions'],
-			cascade: false
+			cascade: !Production
 		}))
 		.pipe(gulp.dest(paths.stylus.dest));
 });
@@ -108,4 +120,8 @@ gulp.task('scripts', function() {
 
 gulp.task('default', function(callback) {
 	runSequence('clean', ['jade', 'stylus', 'scripts'], callback);
+});
+
+gulp.task('build', function(callback) {
+	runSequence('production', 'clean', ['jade', 'stylus', 'scripts'], callback);
 });

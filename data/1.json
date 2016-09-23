@@ -5,6 +5,7 @@
 			"elems": [
 				{
 					"num": 1,
+					"path": "../../img/b1/1.jpg",
 					"ru": {
 						"title": "Привет",
 						"description": "Как дела?",

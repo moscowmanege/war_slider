@@ -10,6 +10,14 @@ html
 		script(type='text/javascript', src='js/swiper.jquery.min.js')
 		script(type='text/javascript', src='js/main.js')
 	body
-		.blocks
-			each block in blocks
-				.block= block.title
+		.swiper-container.swiper-container-v
+			.swiper-pagination.swiper-pagination-v
+			.swiper-wrapper
+				each block in blocks
+					.swiper-slide
+						.slide-title= block.title
+						.swiper-container.swiper-container-h
+							.swiper-pagination.swiper-pagination-h
+							.swiper-wrapper
+								each elem in block.elems
+									.swiper-slide= elem.ru.title
