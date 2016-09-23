@@ -1,0 +1,15 @@
+doctype html
+html
+	head
+		title W A R | S L I D E R
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+		link(rel='stylesheet', type='text/css', href='css/main.css')
+		link(rel='stylesheet', type='text/css', href='css/swiper.min.css')
+		script(type='text/javascript', src='js/jquery-2.2.4.min.js')
+		script(type='text/javascript', src='js/swiper.jquery.min.js')
+		script(type='text/javascript', src='js/main.js')
+	body
+		.blocks
+			each block in blocks
+				.block= block.title
