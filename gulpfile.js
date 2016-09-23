@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+		changed = require('gulp-changed'),
 		data = require('gulp-data'),
 		foreach = require('gulp-foreach'),
 		rename = require('gulp-rename'),
@@ -58,6 +59,10 @@ var error_logger = function(error) {
 	].join('\n'));
 };
 
+var watch_logger = function(event) {
+	console.log('File ' + event.path.replace(__dirname + '/', '').green + ' was ' + event.type.yellow + ', running tasks...');
+};
+
 
 // Handlers Block
 
@@ -69,11 +74,6 @@ var getJsonData = function(file) {
 
 // Tasks Block
 
-
-gulp.task('production', function(callback) {
-	Production = true;
-	callback();
-});
 
 gulp.task('clean', function(callback) {
 	return rimraf('build/**', callback);
@@ -100,6 +100,7 @@ gulp.task('jade', function() {
 gulp.task('stylus', function() {
 	return gulp.src(paths.stylus.src)
 		.pipe(plumber(error_logger))
+		.pipe(changed(paths.stylus.dest))
 		.pipe(stylus({ compress: Production }))
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions'],
@@ -111,7 +112,18 @@ gulp.task('stylus', function() {
 gulp.task('scripts', function() {
 	return gulp.src(paths.scripts.src)
 		.pipe(plumber(error_logger))
+		.pipe(changed(paths.scripts.dest))
 		.pipe(gulp.dest(paths.scripts.dest));
+});
+
+gulp.task('watch', function() {
+	gulp.watch(paths.scripts.src, ['scripts']).on('change', watch_logger);
+	gulp.watch(paths.stylus.src, ['stylus']).on('change', watch_logger);
+});
+
+gulp.task('production', function(callback) {
+	Production = true;
+	callback();
 });
 
 
@@ -125,3 +137,5 @@ gulp.task('default', function(callback) {
 gulp.task('build', function(callback) {
 	runSequence('production', 'clean', ['jade', 'stylus', 'scripts'], callback);
 });
+
+gulp.task('dev', ['watch']);
