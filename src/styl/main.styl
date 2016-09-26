@@ -1,0 +1,80 @@
+html, body
+	position relative
+	height 100%
+
+body
+	margin 0
+	padding 0
+
+.navigate-container
+	width 100%
+	height 200px
+	z-index 9999
+	position fixed
+	overflow hidden
+	background-color black
+	.navigate-blocks
+		color white
+		float left
+		.navigate-block
+			font 12pt/14pt 'Helvetica'
+			&.active
+				font 22pt/24pt 'Helvetica'
+	.navigate-buttons
+		width 160px
+		height 200px
+		float right
+		position relative
+		.navigate-button
+			width 50px
+			height 50px
+			border-radius 50px
+			background-color white
+			margin auto
+			position absolute
+			&.active
+				background-color red
+			&.up
+				left 0
+				right 0
+				top 0
+			&.down
+				bottom 0
+				left 0
+				right 0
+			&.left
+				left 0
+				top 0
+				bottom 0
+				bottom 0
+			&.right
+				right 0
+				top 0
+				bottom 0
+
+
+.swiper-container
+	width 100%
+	height 100%
+	background-color black
+	color white
+	.swiper-slide
+		background-position center
+		background-size contain
+		background-repeat no-repeat
+		.slide-footer
+			overflow hidden
+			position absolute
+			bottom 0
+			width 800px
+			left 50%
+			margin-left -400px
+			background-color grey
+			.slide-label
+				position relative
+				box-sizing border-box
+				padding 15px
+				&.ru
+					float left
+				&.en
+					float right

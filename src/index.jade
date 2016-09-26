@@ -21,8 +21,8 @@ html
 		.navigate-container
 
 			.navigate-blocks
-				each block in blocks
-					.navigate-block= block.title
+				each block, i in blocks
+					.navigate-block(class= (i==0) ? 'active' : '')= block.title
 
 			.navigate-buttons
 				.navigate-button.up
@@ -31,15 +31,15 @@ html
 				.navigate-button.right
 
 		.swiper-container.swiper-container-v
-			.swiper-pagination.swiper-pagination-v
+			//- .swiper-pagination.swiper-pagination-v
 			.swiper-wrapper
 				each block in blocks
 					.swiper-slide
 						.swiper-container.swiper-container-h
-							.swiper-pagination.swiper-pagination-h
+							//- .swiper-pagination.swiper-pagination-h
 							.swiper-wrapper
 								each elem in block.elems
-									.swiper-slide
+									.swiper-slide(style='background-image: url(' + elem.path + ')')
 										.slide-footer
 											+label(elem, 'ru')
 											+label(elem, 'en')
