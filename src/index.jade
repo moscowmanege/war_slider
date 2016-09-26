@@ -30,17 +30,13 @@ html
 				.navigate-button.left
 				.navigate-button.right
 
-		.swiper-container.swiper-container-v
-			//- .swiper-pagination.swiper-pagination-v
-			.swiper-wrapper
-				each block in blocks
-					.swiper-slide
-						.swiper-container.swiper-container-h
-							//- .swiper-pagination.swiper-pagination-h
-							.swiper-wrapper
-								each elem in block.elems
-									.swiper-slide(style='background-image: url(' + elem.path + ')')
-										.slide-footer
-											+label(elem, 'ru')
-											+label(elem, 'en')
+		.swiper-container.swiper-container-v: .swiper-wrapper
+			each block in blocks
+				.swiper-slide
+					.swiper-container.swiper-container-h: .swiper-wrapper
+						each elem in block.elems
+							.swiper-slide(style='background-image: url(' + elem.path + ')')
+								.slide-footer
+									+label(elem, 'ru')
+									+label(elem, 'en')
 
