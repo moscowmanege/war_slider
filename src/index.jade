@@ -1,3 +1,11 @@
+mixin label(elem, locale)
+	.slide-label(class=locale)
+		.label-title= elem[locale].title
+		.label-description= elem[locale].description
+		.label-museum= elem[locale].museum
+		.label-year-place= elem[locale].year_place
+		.label-size-mat= elem[locale].size_mat
+
 doctype html
 html
 	head
@@ -10,14 +18,29 @@ html
 		script(type='text/javascript', src='../js/swiper.jquery.min.js')
 		script(type='text/javascript', src='../js/main.js')
 	body
+		.navigate-container
+
+			.navigate-blocks
+				each block in blocks
+					.navigate-block= block.title
+
+			.navigate-buttons
+				.navigate-button.up
+				.navigate-button.down
+				.navigate-button.left
+				.navigate-button.right
+
 		.swiper-container.swiper-container-v
 			.swiper-pagination.swiper-pagination-v
 			.swiper-wrapper
 				each block in blocks
 					.swiper-slide
-						.slide-title= block.title
 						.swiper-container.swiper-container-h
 							.swiper-pagination.swiper-pagination-h
 							.swiper-wrapper
 								each elem in block.elems
-									.swiper-slide= elem.ru.title
+									.swiper-slide
+										.slide-footer
+											+label(elem, 'ru')
+											+label(elem, 'en')
+

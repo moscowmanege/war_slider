@@ -22,6 +22,31 @@
 					}
 				}
 			]
+		},
+
+		{
+			"title": "ВОЙНА ПОБЕДА",
+			"elems": [
+				{
+					"num": 1,
+					"path": "../../img/b1/1.jpg",
+					"ru": {
+						"title": "Победа",
+						"description": "Как дела?",
+						"year_place": "СССР, 5 июня 1940 г.",
+						"museum": "ГМОМ",
+						"size_mat": "55х18х17 см., металл, стекло, резина, краска"
+					},
+					"en": {
+						"title": "Win!",
+						"description": "How are you?",
+						"year_place": "СССР, 5 июня 1940 г.",
+						"museum": "GMOM",
+						"size_mat": "55х18х17 cm., metal, glass"
+					}
+				}
+			]
 		}
+
 	]
 }
