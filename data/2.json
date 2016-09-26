@@ -3,8 +3,8 @@
 		{
 			"title": "ВОЙНА ДОКУМЕНТЫ",
 			"elems": [
+
 				{
-					"num": 1,
 					"path": "../../img/b2/1.jpg",
 					"ru": {
 						"title": "Привет",
@@ -21,6 +21,7 @@
 						"size_mat": "55х18х17 cm., metal, glass"
 					}
 				}
+
 			]
 		}
 	]
