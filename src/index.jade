@@ -18,17 +18,15 @@ html
 		script(type='text/javascript', src='../js/swiper.jquery.min.js')
 		script(type='text/javascript', src='../js/main.js')
 	body
-		.navigate-container
+		.navigate-blocks
+			each block, i in blocks
+				.navigate-block(class= (i==0) ? 'active' : '')= block.title
 
-			.navigate-blocks
-				each block, i in blocks
-					.navigate-block(class= (i==0) ? 'active' : '')= block.title
-
-			.navigate-buttons
-				.navigate-button.up
-				.navigate-button.down
-				.navigate-button.left
-				.navigate-button.right
+		.navigate-buttons
+			.navigate-button.up: .button-inner
+			.navigate-button.down: .button-inner
+			.navigate-button.left: .button-inner
+			.navigate-button.right: .button-inner
 
 		.swiper-container.swiper-container-v: .swiper-wrapper
 			each block in blocks

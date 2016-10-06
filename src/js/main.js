@@ -12,6 +12,7 @@ $(function() {
 	var swiperV = new Swiper('.swiper-container-v', {
 		direction: 'vertical',
 		keyboardControl: true,
+		// loop: true,
 		// touchRatio: 0,
 	});
 
@@ -26,8 +27,16 @@ $(function() {
 		keyboardControl: true
 	});
 
+	var interval;
 	swiperV.on('slideChangeStart', function(swiper) {
 		$('.navigate-block').removeClass('active').eq(swiper.activeIndex).addClass('active');
+
+		$('.navigate-blocks').addClass('active');
+
+		clearInterval(interval);
+		interval = setInterval(function() {
+			$('.navigate-blocks').removeClass('active');
+		}, 300);
 	});
 
 	swiperH.forEach(function(item, index) {
