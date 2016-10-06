@@ -20,7 +20,7 @@ var path = require('path'),
 
 var paths = {
 	scripts: {
-		src: 'src/js/**/*',
+		src: 'src/js/**/*.{js,map}',
 		dest: 'build/js'
 	},
 	stylus: {

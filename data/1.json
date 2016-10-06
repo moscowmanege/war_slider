@@ -38,6 +38,42 @@
 						"museum": "GMOM",
 						"size_mat": "55х18х17 cm., metal, glass"
 					}
+				},
+
+				{
+					"path": "../../img/b1/2.jpg",
+					"ru": {
+						"title": "Привет",
+						"description": "Как дела?",
+						"year_place": "СССР, 5 июня 1940 г.",
+						"museum": "ГМОМ",
+						"size_mat": "55х18х17 см., металл, стекло, резина, краска"
+					},
+					"en": {
+						"title": "Hello",
+						"description": "How are you?",
+						"year_place": "СССР, 5 июня 1940 г.",
+						"museum": "GMOM",
+						"size_mat": "55х18х17 cm., metal, glass"
+					}
+				},
+
+				{
+					"path": "../../img/b1/2.jpg",
+					"ru": {
+						"title": "Привет",
+						"description": "Как дела?",
+						"year_place": "СССР, 5 июня 1940 г.",
+						"museum": "ГМОМ",
+						"size_mat": "55х18х17 см., металл, стекло, резина, краска"
+					},
+					"en": {
+						"title": "Hello",
+						"description": "How are you?",
+						"year_place": "СССР, 5 июня 1940 г.",
+						"museum": "GMOM",
+						"size_mat": "55х18х17 cm., metal, glass"
+					}
 				}
 
 			]

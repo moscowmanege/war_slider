@@ -35,8 +35,9 @@ html
 				.swiper-slide
 					.swiper-container.swiper-container-h: .swiper-wrapper
 						each elem in block.elems
-							.swiper-slide(style='background-image: url(' + elem.path + ')')
-								.slide-footer
+							.swiper-slide
+								.slide-image(style='background-image: url(' + elem.path + ')')
+								.slide-footer: .footer-inner
 									+label(elem, 'ru')
 									+label(elem, 'en')
 
