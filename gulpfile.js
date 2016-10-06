@@ -119,6 +119,7 @@ gulp.task('scripts', function() {
 gulp.task('watch', function() {
 	gulp.watch(paths.scripts.src, ['scripts']).on('change', watch_logger);
 	gulp.watch(paths.stylus.src, ['stylus']).on('change', watch_logger);
+	gulp.watch(paths.html.src, ['jade']).on('change', watch_logger);
 });
 
 gulp.task('production', function(callback) {

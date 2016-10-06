@@ -42,21 +42,11 @@ body
 		width 50px
 		height 50px
 		border-radius 50px
-		background-color white
 		margin auto
 		position absolute
-		.button-inner
-			width 44px
-			height 44px
-			position absolute
-			margin auto
-			top 0
-			left 0
-			right 0
-			bottom 0
-			background-color black
-			border-radius 50px
-		&.active .button-inner
+		border 4px solid white
+		box-sizing border-box
+		&.active
 			background-color white
 		&.up
 			left 0
@@ -96,6 +86,7 @@ body
 			height 20%
 			transition: height .2s ease-in-out;
 			background-color black
+			font 12pt/16pt 'Helvetica'
 			.footer-inner
 				max-width 680px
 				margin 0 auto
