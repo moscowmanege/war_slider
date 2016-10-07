@@ -1,5 +1,7 @@
 $(function() {
 	var buttons = {40: 'down', 38: 'up', 37: 'left', 39: 'right'};
+	var banner_interval;
+	var swiper_interval;
 
 	$(document)
 		.on('keydown', function(event) {
@@ -7,6 +9,23 @@ $(function() {
 		})
 		.on('keyup', function(event) {
 			if (Object.keys(buttons).indexOf('' + event.which) != -1) $('.navigate-button.' + buttons[event.which]).removeClass('active');
+		});
+
+	$(document)
+		.on('keydown', function(event) {
+			if (Object.keys(buttons).indexOf('' + event.which) != -1) {
+				$('.banner-block').addClass(buttons[event.which]);
+			}
+		})
+		.on('keyup', function(event) {
+			if (Object.keys(buttons).indexOf('' + event.which) != -1) {
+				$('.banner-block').addClass('out');
+
+				clearInterval(banner_interval);
+				banner_interval = setInterval(function() {
+					$('.banner-block').removeClass('left right down up out');
+				}, 3000);
+			}
 		});
 
 	var swiperV = new Swiper('.swiper-container-v', {
@@ -27,14 +46,13 @@ $(function() {
 		keyboardControl: true
 	});
 
-	var interval;
 	swiperV.on('slideChangeStart', function(swiper) {
 		$('.navigate-block').removeClass('active').eq(swiper.activeIndex).addClass('active');
 
 		$('.navigate-blocks').addClass('active');
 
-		clearInterval(interval);
-		interval = setInterval(function() {
+		clearInterval(swiper_interval);
+		swiper_interval = setInterval(function() {
 			$('.navigate-blocks').removeClass('active');
 		}, 300);
 	});

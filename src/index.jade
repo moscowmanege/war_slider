@@ -18,6 +18,9 @@ html
 		script(type='text/javascript', src='../js/swiper.jquery.min.js')
 		script(type='text/javascript', src='../js/main.js')
 	body
+		.banner-block
+			.round
+
 		.navigate-blocks
 			each block, i in blocks
 				.navigate-block(class= (i==0) ? 'active' : '')= block.title
