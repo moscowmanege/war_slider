@@ -7,6 +7,8 @@ $(function() {
 		direction: 'vertical',
 		// loop: true,
 		// runCallbacksOnInit: false,
+		// loop: true,
+		// runCallbacksOnInit: false,
 		// touchRatio: 0,
 		// keyboardControl: true,
 		onSlideChangeStart: function(swiper) {
@@ -24,17 +26,21 @@ $(function() {
 		slidesPerView: 'auto',
 		spaceBetween: 30,
 		direction: 'horizontal',
-		// loop: true,
-		// runCallbacksOnInit: false,
 		// autoHeight: true,
 		// initialSlide: 1,
 		// centeredSlides: true,
 		// keyboardControl: true,
+		loop: true,
+		runCallbacksOnInit: false,
+		// preloadImages: false,
+		// lazyLoading: true,
+		// lazyLoadingInPrevNext: true,
+		// lazyLoadingInPrevNextAmount: 3,
 		onInit: function(swiper) {
 			$(swiper.slides).filter('.swiper-slide-prev, .swiper-slide-next').addClass('close');
 		},
 		onSlideChangeStart: function(swiper) {
-			$(swiper.slides).filter('.swiper-slide-prev, .swiper-slide-next').addClass('close');
+			$(swiper.slides).filter('.swiper-slide-prev, .swiper-slide-active, .swiper-slide-next').addClass('close');
 		},
 		onSlideChangeEnd: function(swiper) {
 			$(swiper.slides).filter('.swiper-slide-active').removeClass('close');
