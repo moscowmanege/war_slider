@@ -1,3 +1,13 @@
+@keyframes stretch {
+	0% {
+		transform: scale(.2);
+		background-color white
+	}
+	100% {
+		transform: scale(1.5);
+	}
+}
+
 html, body
 	position relative
 	height 100%
@@ -19,10 +29,18 @@ body
 		width 170px
 		height 170px
 		border 5px solid white
-		border-radius 200px
+		border-radius 100%
 		margin auto
 		position absolute
 		top 0; left 0; right 0; bottom 0
+		animation-name: stretch;
+		animation-duration: 2.2s;
+		animation-timing-function: ease-in-out;
+		animation-delay: 0;
+		animation-direction: alternate;
+		animation-iteration-count: infinite;
+		animation-fill-mode: none;
+		animation-play-state: running;
 	&.left
 		left -30%
 		&.out
@@ -60,7 +78,8 @@ body
 		padding-top 8px
 		padding-bottom 8px
 		&.active
-			background-color rgb(134, 117, 80)
+			background-color white
+			color black
 			font 20pt/22pt 'Helvetica'
 
 .navigate-buttons
@@ -100,8 +119,10 @@ body
 	.swiper-slide
 		&.close
 			.slide-image
+				transition height .2s ease-in-out
 				height 100%
 			.slide-footer
+				transition height .2s ease-in-out
 				height 0
 		.slide-image
 			background-position center
