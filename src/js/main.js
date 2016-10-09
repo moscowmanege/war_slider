@@ -1,7 +1,7 @@
 $(function() {
 	var buttons = {40: 'down', 38: 'up', 37: 'left', 39: 'right'};
 	var banner_timeout = null;
-	var swiper_timeout = null;
+	var navigate_timeout = null;
 
 	var swiperV = new Swiper('.swiper-container-v', {
 		slidesPerView: 1,
@@ -18,8 +18,8 @@ $(function() {
 		onSlideChangeStart: function(swiper) {
 			$('.navigate-blocks').addClass('active');
 
-			clearTimeout(swiper_timeout);
-			swiper_timeout = setTimeout(function() {
+			clearTimeout(navigate_timeout);
+			navigate_timeout = setTimeout(function() {
 				$('.navigate-blocks').removeClass('active');
 			}, 300);
 		}
