@@ -4,7 +4,7 @@
 		background-color white
 	}
 	100% {
-		transform: scale(1.5);
+		transform: scale(1.4);
 	}
 }
 
@@ -24,14 +24,15 @@ body
 	height 100%
 	background-color rgba(0, 0, 0, 0.85)
 	top 0; left 0; right 0; bottom 0
-	transition all .7s cubic-bezier(.07,.89,.34,1.4)
+	transition all .8s cubic-bezier(.07,.89,.34,1.4)
 	.round
 		width 170px
 		height 170px
 		border 5px solid white
 		border-radius 100%
 		margin auto
-		position absolute
+		position fixed
+		z-index 0
 		top 0; left 0; right 0; bottom 0
 		animation-name: stretch;
 		animation-duration: 2.2s;
@@ -41,6 +42,8 @@ body
 		animation-iteration-count: infinite;
 		animation-fill-mode: none;
 		animation-play-state: running;
+	&.out .round
+		display none
 	&.left
 		left -30%
 		&.out
