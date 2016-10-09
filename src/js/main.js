@@ -52,27 +52,21 @@ $(function() {
 
 	$(document)
 		.on('keydown', function(event) {
-			if (Object.keys(buttons).indexOf('' + event.which) != -1) $('.navigate-button.' + buttons[event.which]).addClass('active');
-		})
-		.on('keyup', function(event) {
-			if (Object.keys(buttons).indexOf('' + event.which) != -1) $('.navigate-button.' + buttons[event.which]).removeClass('active');
-		});
+			if (Object.keys(buttons).indexOf('' + event.which) != -1) {
+				$('.navigate-button.' + buttons[event.which]).addClass('active');
 
-	$(document)
-		.on('keydown', function(event) {
-			if (!banner_timeout && Object.keys(buttons).indexOf('' + event.which) != -1) {
-				$('.banner-block').addClass(buttons[event.which]);
+				if (!banner_timeout) $('.banner-block').addClass(buttons[event.which]);
 			}
 		})
 		.on('keyup', function(event) {
 			if (Object.keys(buttons).indexOf('' + event.which) != -1) {
+				$('.navigate-button.' + buttons[event.which]).removeClass('active');
 
 				if (!banner_timeout) {
 					swiperH.forEach(function(swiper, index) { swiper.enableKeyboardControl(); });
 					swiperV.enableKeyboardControl();
+					$('.banner-block').addClass('out');
 				}
-
-				$('.banner-block').addClass('out');
 
 				clearTimeout(banner_timeout);
 				banner_timeout = setTimeout(function() {
