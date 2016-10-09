@@ -63,7 +63,7 @@ $(function() {
 				$('.navigate-button.' + buttons[event.which]).removeClass('active');
 
 				if (!banner_timeout) {
-					swiperH.forEach(function(swiper, index) { swiper.enableKeyboardControl(); });
+					swiperH.forEach(function(swiper) { swiper.enableKeyboardControl(); });
 					swiperV.enableKeyboardControl();
 					$('.banner-block').addClass('out');
 				}
@@ -72,7 +72,7 @@ $(function() {
 				banner_timeout = setTimeout(function() {
 					$('.banner-block').removeClass('left right down up out');
 
-					swiperH.forEach(function(swiper, index) { swiper.disableKeyboardControl(); });
+					swiperH.forEach(function(swiper) { swiper.disableKeyboardControl(); });
 					swiperV.disableKeyboardControl();
 					banner_timeout = null;
 				}, 4000);
