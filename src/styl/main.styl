@@ -14,7 +14,7 @@ body
 	height 100%
 	background-color rgba(0, 0, 0, 0.85)
 	top 0; left 0; right 0; bottom 0
-	transition all 0.7s cubic-bezier(.07,.89,.34,1.4)
+	transition all .7s cubic-bezier(.07,.89,.34,1.4)
 	.round
 		width 170px
 		height 170px
@@ -50,18 +50,18 @@ body
 	max-height 0
 	margin 0
 	padding 0
-	transition max-height 0.8s ease-in-out
+	transition max-height .8s ease-in-out
 	&.active
 		max-height 1000px
-		transition max-height 0.8s ease-in-out
+		transition max-height .8s ease-in-out
 	.navigate-block
 		text-align center
 		font 12pt/14pt 'Helvetica'
-		padding-bottom 10px
-		&:first-child
-			padding-top 10px
+		padding-top 8px
+		padding-bottom 8px
 		&.active
-			font 22pt/24pt 'Helvetica'
+			background-color rgb(134, 117, 80)
+			font 20pt/22pt 'Helvetica'
 
 .navigate-buttons
 	z-index 99999999999999
@@ -98,6 +98,11 @@ body
 	color white
 	overflow hidden
 	.swiper-slide
+		&.close
+			.slide-image
+				height 100%
+			.slide-footer
+				height 0
 		.slide-image
 			background-position center
 			background-size contain
@@ -121,10 +126,3 @@ body
 					padding 15px
 					width 50%
 					float left
-		&.close
-			.slide-image
-				transition height .2s ease-in-out
-				height 100%
-			.slide-footer
-				transition height .2s ease-in-out
-				height 0
