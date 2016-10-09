@@ -4,15 +4,18 @@ $(function() {
 	var swiper_timeout = null;
 
 	var swiperV = new Swiper('.swiper-container-v', {
+		slidesPerView: 1,
 		direction: 'vertical',
-		// loop: true,
-		// runCallbacksOnInit: false,
-		// loop: true,
-		// runCallbacksOnInit: false,
+		loop: true,
+		runCallbacksOnInit: false,
 		// touchRatio: 0,
 		// keyboardControl: true,
+		pagination: true,
+		paginationType: 'custom',
+		paginationCustomRender: function(swiper, current, total) {
+			$('.navigate-block').removeClass('active').eq(current - 1).addClass('active');
+		},
 		onSlideChangeStart: function(swiper) {
-			$('.navigate-block').removeClass('active').eq(swiper.activeIndex).addClass('active');
 			$('.navigate-blocks').addClass('active');
 
 			clearTimeout(swiper_timeout);
@@ -23,9 +26,9 @@ $(function() {
 	});
 
 	var swiperH = new Swiper('.swiper-container-h', {
-		slidesPerView: 'auto',
-		spaceBetween: 30,
+		slidesPerView: 1,
 		direction: 'horizontal',
+		// spaceBetween: 30,
 		// autoHeight: true,
 		// initialSlide: 1,
 		// centeredSlides: true,
