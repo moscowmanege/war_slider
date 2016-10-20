@@ -1,8 +1,17 @@
 var fs = require('fs');
 var jsdom = require('jsdom');
+var rimraf = require('rimraf');
 
 var jquery = fs.readFileSync('./src/js/jquery-2.2.4.min.js', 'utf8');
 var html = fs.readFileSync('./data/raw/in.html', 'utf8');
+
+var uniq = function(a) {
+	return a.sort().filter(function(item, pos, ary) {
+		return !pos || item != ary[pos - 1];
+	});
+};
+
+rimraf.sync('./data/halls/*');
 
 jsdom.env({
 	html: html,
@@ -10,7 +19,7 @@ jsdom.env({
 	done: function (err, window) {
 		var $ = window.$;
 
-		var result = $('tr').slice(1).map(function() {
+		var array = $('tr').slice(1).map(function() {
 			var td = $(this).children('td');
 
 			return {
@@ -37,13 +46,24 @@ jsdom.env({
 					complex: td.eq(14).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 				}
 
-			}
+			};
 		}).toArray();
 
-		fs.writeFile('./data/raw/result.json', JSON.stringify(result, null, 2), 'utf8', function(err) {
-			if (err) throw err;
+		var halls = array.map(function(item) {
+			return item.hall;
+		});
 
-			console.log('json saved');
+		uniq(halls).forEach(function(item) {
+			var hall = {
+				hall: item,
+				items: array.filter(function(check_item) { return check_item.hall == item; })
+			};
+
+			fs.writeFile('./data/halls/' + item + '.json', JSON.stringify(hall, null, 2), 'utf8', function(err) {
+				if (err) throw err;
+
+				console.log('json item ' + item + ' saved');
+			});
 		});
 	}
 });
