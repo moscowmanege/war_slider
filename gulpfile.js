@@ -32,7 +32,7 @@ var paths = {
 		dest: 'build/html'
 	},
 	data: {
-		src: 'data/*.json'
+		src: 'data/halls/*.json'
 	}
 };
 

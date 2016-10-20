@@ -24,13 +24,13 @@ jsdom.env({
 
 			return {
 				hall: +td.eq(15).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim().replace('Павильон № ', ''),
-				file_name: td.eq(6).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
+				path: td.eq(6).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 
 				ru: {
 					title: td.eq(0).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					description: td.eq(1).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					description_alt: td.eq(2).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
-					place_year: td.eq(3).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
+					year_place: td.eq(3).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					museum: td.eq(4).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					size_mat: td.eq(5).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					complex: td.eq(7).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
@@ -40,7 +40,7 @@ jsdom.env({
 					title: td.eq(8).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					description: td.eq(9).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					description_alt: td.eq(10).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
-					place_year: td.eq(11).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
+					year_place: td.eq(11).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					museum: td.eq(12).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					size_mat: td.eq(13).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
 					complex: td.eq(14).text().replace(/\t+/g, '').replace(/\n/g, ' ').trim(),
@@ -54,9 +54,22 @@ jsdom.env({
 		});
 
 		uniq(halls).forEach(function(item) {
+			var items = array.filter(function(check_item) { return check_item.hall == item; });
+
+			var complexes = items.map(function(cx_item) {
+				return cx_item.ru.complex;
+			});
+
+			var complex_items = uniq(complexes).map(function(complex) {
+				return {
+					title: complex,
+					elems: items.filter(function(c_item) { return c_item.ru.complex == complex; })
+				};
+			});
+
 			var hall = {
 				hall: item,
-				items: array.filter(function(check_item) { return check_item.hall == item; })
+				blocks: complex_items
 			};
 
 			fs.writeFile('./data/halls/' + item + '.json', JSON.stringify(hall, null, 2), 'utf8', function(err) {
