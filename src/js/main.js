@@ -53,18 +53,20 @@ $(function() {
 	$(document)
 		.on('keydown', function(event) {
 			if (Object.keys(buttons).indexOf('' + event.which) != -1) {
-				$('.navigate-button.' + buttons[event.which]).addClass('active');
-
-				!$('.banner-block').hasClass('out') && $('.navigate-blocks').addClass('force').removeClass('active');
+				if (!$('.banner-block').hasClass('out')) {
+					$('.navigate-button.' + buttons[event.which]).addClass('active');
+					$('.navigate-blocks').addClass('force').removeClass('active');
+				}
 
 				if (!banner_timeout) $('.banner-block').addClass(buttons[event.which]);
 			}
 		})
 		.on('keyup', function(event) {
 			if (Object.keys(buttons).indexOf('' + event.which) != -1) {
-				$('.navigate-button.' + buttons[event.which]).removeClass('active');
-
-				!$('.banner-block').hasClass('out') && $('.navigate-blocks').removeClass('force');
+				if (!$('.banner-block').hasClass('out')) {
+					$('.navigate-button.' + buttons[event.which]).removeClass('active');
+					$('.navigate-blocks').removeClass('force');
+				}
 
 				if (!banner_timeout) {
 					swiperH.forEach(function(swiper) { swiper.enableKeyboardControl(); });
@@ -75,8 +77,7 @@ $(function() {
 				clearTimeout(banner_timeout);
 				banner_timeout = setTimeout(function() {
 					$('.banner-block, .navigate-buttons').removeClass('left right down up out');
-
-					!$('.banner-block').hasClass('out') && $('.navigate-blocks').addClass('active');
+					$('.navigate-blocks').addClass('active');
 
 					swiperH.forEach(function(swiper) { swiper.disableKeyboardControl(); });
 					swiperV.disableKeyboardControl();
