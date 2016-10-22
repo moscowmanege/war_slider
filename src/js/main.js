@@ -65,17 +65,17 @@ $(function() {
 				if (!banner_timeout) {
 					swiperH.forEach(function(swiper) { swiper.enableKeyboardControl(); });
 					swiperV.enableKeyboardControl();
-					$('.banner-block').addClass('out');
+					$('.banner-block, .navigate-buttons').addClass('out');
 				}
 
 				clearTimeout(banner_timeout);
 				banner_timeout = setTimeout(function() {
-					$('.banner-block').removeClass('left right down up out');
+					$('.banner-block, .navigate-buttons').removeClass('left right down up out');
 
 					swiperH.forEach(function(swiper) { swiper.disableKeyboardControl(); });
 					swiperV.disableKeyboardControl();
 					banner_timeout = null;
-				}, 6000);
+				}, 3000);
 
 			}
 		});

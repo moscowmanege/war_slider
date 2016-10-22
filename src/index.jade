@@ -19,17 +19,17 @@ html
 		script(type='text/javascript', src='../js/main.js')
 	body
 		.banner-block
-			.round
-
-		.navigate-blocks
-			each block, i in blocks
-				.navigate-block(class= (i==0) ? 'active' : '')= block.title
 
 		.navigate-buttons
 			.navigate-button.up
 			.navigate-button.down
 			.navigate-button.left
 			.navigate-button.right
+
+		.navigate-blocks
+			each block, i in blocks
+				.navigate-block(class= (i==0) ? 'active' : '')= block.title
+
 
 		.swiper-container.swiper-container-v: .swiper-wrapper
 			each block in blocks
