@@ -26,7 +26,7 @@ html
 			.navigate-button.left
 			.navigate-button.right
 
-		.navigate-blocks
+		.navigate-blocks.active
 			each block, i in blocks
 				.navigate-block(class= (i==0) ? 'active' : '')= block.title
 
