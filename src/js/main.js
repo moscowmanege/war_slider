@@ -75,7 +75,7 @@ $(function() {
 					swiperH.forEach(function(swiper) { swiper.disableKeyboardControl(); });
 					swiperV.disableKeyboardControl();
 					banner_timeout = null;
-				}, 4000);
+				}, 6000);
 
 			}
 		});

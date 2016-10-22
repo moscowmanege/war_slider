@@ -1,11 +1,12 @@
 {
+	"hall": 1,
 	"blocks": [
 		{
 			"title": "ВОЙНА КИНО",
 			"elems": [
 
 				{
-					"path": "../../img/b1/1.jpg",
+					"path": "1.jpg",
 					"ru": {
 						"title": "Привет",
 						"description": "Как дела?",
@@ -23,7 +24,7 @@
 				},
 
 				{
-					"path": "../../img/b1/2.jpg",
+					"path": "2.jpg",
 					"ru": {
 						"title": "Привет",
 						"description": "Как дела?",
@@ -41,7 +42,7 @@
 				},
 
 				{
-					"path": "../../img/b1/3.jpg",
+					"path": "3.jpg",
 					"ru": {
 						"title": "Привет",
 						"description": "Как дела?",
@@ -59,7 +60,7 @@
 				},
 
 				{
-					"path": "../../img/b1/2.jpg",
+					"path": "2.jpg",
 					"ru": {
 						"title": "Привет",
 						"description": "Как дела?",
@@ -85,7 +86,7 @@
 
 				{
 					"num": 1,
-					"path": "../../img/b2/1.jpg",
+					"path": "1.jpg",
 					"ru": {
 						"title": "Победа",
 						"description": "Как дела?",
@@ -104,7 +105,7 @@
 
 				{
 					"num": 1,
-					"path": "../../img/b2/2.jpg",
+					"path": "2.jpg",
 					"ru": {
 						"title": "Победа",
 						"description": "Как дела?",
@@ -123,7 +124,7 @@
 
 				{
 					"num": 1,
-					"path": "../../img/b2/1.jpg",
+					"path": "1.jpg",
 					"ru": {
 						"title": "Победа",
 						"description": "Как дела?",
@@ -149,7 +150,7 @@
 
 				{
 					"num": 1,
-					"path": "../../img/b2/1.jpg",
+					"path": "1.jpg",
 					"ru": {
 						"title": "Победа",
 						"description": "Как дела?",

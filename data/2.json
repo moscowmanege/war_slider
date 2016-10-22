@@ -1,11 +1,12 @@
 {
+	"hall": 2,
 	"blocks": [
 		{
 			"title": "ВОЙНА ДОКУМЕНТЫ",
 			"elems": [
 
 				{
-					"path": "../../img/b2/1.jpg",
+					"path": "1.jpg",
 					"ru": {
 						"title": "Привет",
 						"description": "Как дела?",

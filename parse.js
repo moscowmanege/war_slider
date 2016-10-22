@@ -54,7 +54,7 @@ jsdom.env({
 		});
 
 		uniq(halls).forEach(function(item) {
-			var items = array.filter(function(check_item) { return check_item.hall == item; });
+			var items = array.filter(function(check_item) { return (check_item.hall == item && check_item.path != ''); });
 
 			var complexes = items.map(function(cx_item) {
 				return cx_item.ru.complex;

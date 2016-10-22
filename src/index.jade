@@ -36,8 +36,11 @@ html
 				.swiper-slide
 					.swiper-container.swiper-container-h: .swiper-wrapper
 						each elem in block.elems
+							- var path = elem.path
+							if (!/.jpg|.jpeg|.tiff/g.test(path))
+								- path = path + '.jpg'
 							.swiper-slide
-								.slide-image(style='background-image: url(' + elem.path + ')')
+								.slide-image(style="background-image: url('../../img/test/" + hall + '/' + path + "')")
 								.slide-footer: .footer-inner
 									+label(elem, 'ru')
 									+label(elem, 'en')
