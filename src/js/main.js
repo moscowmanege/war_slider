@@ -64,13 +64,13 @@ $(function() {
 		.on('keyup', function(event) {
 			if (Object.keys(buttons).indexOf('' + event.which) != -1) {
 				if (!$('.banner-block').hasClass('out')) {
-					$('.navigate-button.' + buttons[event.which]).removeClass('active');
 					$('.navigate-blocks').removeClass('force');
 				}
 
 				if (!banner_timeout) {
 					swiperH.forEach(function(swiper) { swiper.enableKeyboardControl(); });
 					swiperV.enableKeyboardControl();
+					$('.navigate-button').removeClass('active');
 					$('.banner-block, .navigate-buttons').addClass('out');
 				}
 
