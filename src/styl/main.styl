@@ -56,10 +56,7 @@ body
 .navigate-buttons
 	z-index 99999999999999
 	position fixed
-	top 0
-	bottom 0
-	left 0
-	right 0
+	top 0; bottom 0; left 0; right 0
 	margin auto
 	width 180px
 	height 250px
@@ -78,28 +75,28 @@ body
 			background-color white
 			transition .6s ease-out
 			&.up
-				animation-name: none;
-				transform: translate(0, -40px);
+				animation-name none
+				top -40px
 			&.left
-				animation-name: none;
-				transform: translate(-40px, 0);
+				animation-name none
+				left -40px
 			&.right
-				animation-name: none;
-				transform: translate(40px, 0);
+				animation-name none
+				right -40px
 			&.down
-				animation-name: none;
-				transform: translate(0, 40px);
+				animation-name none
+				bottom -40px
 		&.up
-			animation: move_up 1.4s infinite alternate;
+			animation move_up 1.4s infinite alternate
 			left 0; right 0; top 0
 		&.down
-			animation: move_down 1.4s infinite alternate;
+			animation move_down 1.4s infinite alternate
 			bottom 0; left 0; right 0
 		&.left
-			animation: move_left 1.4s infinite alternate;
+			animation move_left 1.4s infinite alternate
 			left 0; top 0; bottom 0; bottom 0
 		&.right
-			animation: move_right 1.4s infinite alternate;
+			animation move_right 1.4s infinite alternate
 			right 0; top 0; bottom 0
 
 .navigate-blocks
