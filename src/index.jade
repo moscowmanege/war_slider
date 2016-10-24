@@ -1,7 +1,8 @@
 mixin label(elem, locale)
 	.footer-label(class=locale)
-		.label-title= elem[locale].title
+		.label-title: b= elem[locale].title
 		.label-description= elem[locale].description
+		.label-description-alt= elem[locale].description_alt
 		.label-museum= elem[locale].museum
 		.label-year-place= elem[locale].year_place
 		.label-size-mat= elem[locale].size_mat
