@@ -122,14 +122,28 @@ body
 		transition max-height .8s ease-in
 	.navigate-block
 		text-align center
-		font 18pt/18pt 'Voina'
+		font 16pt/16pt 'Voina'
 		padding-top 14px
 		padding-bottom 8px
+		position relative
 		&.active
 			// background-color rgba(255, 255, 255, 0.4)
-			background-color white
-			color black
+			// background-color white
+			// color black
 			font 28pt/28pt 'Voina'
+			&:before
+			&:after
+				content ''
+				position absolute
+				width 60px
+				height 5px
+				top 48%
+				background-color white
+			&:before
+				margin-left -80px
+			&:after
+				margin-left 20px
+
 
 .swiper-container
 	width 100%
