@@ -21,7 +21,7 @@ $(function() {
 			clearTimeout(navigate_timeout);
 			navigate_timeout = setTimeout(function() {
 				$('.navigate-blocks').removeClass('active');
-			}, 400);
+			}, 600);
 		}
 	});
 

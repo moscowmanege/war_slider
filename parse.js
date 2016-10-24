@@ -61,9 +61,13 @@ jsdom.env({
 			});
 
 			var complex_items = uniq(complexes).map(function(complex) {
+				var elems = items.filter(function(c_item) { return c_item.ru.complex == complex; });
 				return {
-					title: complex,
-					elems: items.filter(function(c_item) { return c_item.ru.complex == complex; })
+					title: {
+						ru: elems[0].ru.complex,
+						en: elems[0].en.complex
+					},
+					elems: elems
 				};
 			});
 

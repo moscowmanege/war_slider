@@ -122,22 +122,26 @@ body
 		transition max-height .8s ease-in
 	.navigate-block
 		text-align center
-		font 16pt/16pt 'Voina'
 		padding-top 14px
-		padding-bottom 8px
+		padding-bottom 10px
 		position relative
-		&.active
-			// background-color rgba(255, 255, 255, 0.4)
-			// background-color white
-			// color black
-			font 28pt/28pt 'Voina'
+		.block-lang
+			display inline-block
+			position relative
+			&.ru
+				font 20pt/20pt 'Voina'
+			&.en
+				padding-top 6px
+				font 12pt/12pt 'Voina'
+		&.active .ru
+			font 30pt/30pt 'Voina'
 			&:before
 			&:after
 				content ''
 				position absolute
 				width 60px
 				height 5px
-				top 48%
+				top 35%
 				background-color white
 			&:before
 				margin-left -80px

@@ -2,7 +2,10 @@
 	"hall": 2,
 	"blocks": [
 		{
-			"title": "ВОЙНА ДОКУМЕНТЫ",
+			"title": {
+				"ru": "ВОЙНА ДОКУМЕНТЫ",
+				"en": "WAR DOCUMENTS"
+			},
 			"elems": [
 
 				{
