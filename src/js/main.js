@@ -21,7 +21,7 @@ $(function() {
 			clearTimeout(navigate_timeout);
 			navigate_timeout = setTimeout(function() {
 				$('.navigate-blocks').removeClass('active');
-			}, 300);
+			}, 400);
 		}
 	});
 
@@ -82,7 +82,7 @@ $(function() {
 					swiperH.forEach(function(swiper) { swiper.disableKeyboardControl(); });
 					swiperV.disableKeyboardControl();
 					banner_timeout = null;
-				}, 3000);
+				}, 8000);
 
 			}
 		});
