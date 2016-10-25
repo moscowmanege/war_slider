@@ -123,30 +123,33 @@ body
 	.navigate-block
 		text-align center
 		padding-top 14px
-		padding-bottom 10px
+		padding-bottom 15px
 		position relative
 		.block-lang
 			display inline-block
 			position relative
+			text-transform uppercase
+			max-width 780px
 			&.ru
-				font 20pt/20pt 'Voina'
+				font 18pt/18pt 'Voina'
 			&.en
 				padding-top 6px
 				font 12pt/12pt 'Voina'
 		&.active .ru
-			font 30pt/30pt 'Voina'
+			font 24pt/24pt 'Voina'
 			&:before
 			&:after
 				content ''
 				position absolute
+				display block
 				width 60px
 				height 5px
 				top 35%
 				background-color white
 			&:before
-				margin-left -80px
+				left -80px
 			&:after
-				margin-left 20px
+				right -80px
 
 
 .swiper-container
