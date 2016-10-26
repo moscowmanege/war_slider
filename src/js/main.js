@@ -82,7 +82,7 @@ $(function() {
 					swiperH.forEach(function(swiper) { swiper.disableKeyboardControl(); });
 					swiperV.disableKeyboardControl();
 					banner_timeout = null;
-				}, 8000);
+				}, 1000 * 40);
 
 			}
 		});
