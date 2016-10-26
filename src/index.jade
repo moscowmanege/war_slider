@@ -41,10 +41,12 @@ html
 					.swiper-container.swiper-container-h: .swiper-wrapper
 						each elem in block.elems
 							- var path = elem.path
-							if (!/.jpg|.jpeg|.tiff/g.test(path))
+							if (!/.jpg|.jpeg|.tiff|.tif/g.test(path))
 								- path = path + '.jpg'
+							else
+								- path = path.replace(/.tiff|.tif|.jpeg/g, '.jpg')
 							.swiper-slide
-								.slide-image(style="background-image: url('../../img/test/" + hall + '/' + path + "')")
+								.slide-image(style="background-image: url('../../img/halls_result/" + hall + '/' + path + "')")
 								.slide-footer: .footer-inner
 									+label(elem, 'ru')
 									+label(elem, 'en')
