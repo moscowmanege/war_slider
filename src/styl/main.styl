@@ -32,6 +32,7 @@ html, body
 body
 	margin 0
 	padding 0
+	cursor url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjbQg61aAAAADUlEQVQYV2P4//8/IwAI/QL/+TZZdwAAAABJRU5ErkJggg=='), none
 
 .banner-block
 	z-index 999999999
@@ -114,35 +115,40 @@ body
 	max-height 0
 	margin 0
 	padding 0
-	transition max-height .8s ease-out
+	transition max-height .6s ease-out
 	&.force
 		transition max-height .4s ease-out
 	&.active
 		max-height 1000px
-		transition max-height .8s ease-in
+		transition max-height .6s ease-in
 	.navigate-block
 		text-align center
-		padding-top 14px
-		padding-bottom 25px
+		padding-bottom 20px
 		position relative
+		&:first-child
+			padding-top 20px
 		.block-lang
-			display inline-block
 			text-transform uppercase
-			max-width 540px
+			width 100%
+			box-sizing border-box
+			padding-left 40px
+			padding-right 40px
+			padding-top 10px
+			padding-bottom 5px
 			&.ru
 				font 18pt/18pt 'Voina'
 				padding-bottom 5px
 				border-bottom 1px solid white
 			&.en
-				margin-top 5px
 				padding-top 6px
 				font 12pt/12pt 'Voina'
 		&.active
 			.block-lang
-				max-width 700px
+				background-color white
+				color black
 				&.ru
-					border-bottom 5px solid white
-					font 24pt/24pt 'Voina'
+					padding-bottom 4px
+					border-bottom 2px solid black
 
 
 .swiper-container
