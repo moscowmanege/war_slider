@@ -16,7 +16,7 @@ var uniq = function(a) {
 
 rimraf.sync('./data/halls/*');
 
-var parseFile = function(window) {
+var parseFile = function(window, base_path) {
 	var $ = window.$;
 
 	var array = $('tr').slice(1).map(function() {
@@ -73,6 +73,7 @@ var parseFile = function(window) {
 
 		var hall = {
 			hall: item,
+			base_path: base_path,
 			blocks: complex_items
 		};
 
@@ -101,7 +102,7 @@ async.parallel({
 	}
 }, function(err, results) {
 	async.parallel([
-		async.apply(parseFile, results.main.window),
-		async.apply(parseFile, results.opt.window)
+		async.apply(parseFile, results.main.window, 'main'),
+		async.apply(parseFile, results.opt.window, 'opt')
 	]);
 });

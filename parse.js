@@ -73,6 +73,7 @@ jsdom.env({
 
 			var hall = {
 				hall: item,
+				base_path: 'main',
 				blocks: complex_items
 			};
 
