@@ -3,7 +3,7 @@ var jsdom = require('jsdom');
 var rimraf = require('rimraf');
 
 var jquery = fs.readFileSync('./src/js/jquery-2.2.4.min.js', 'utf8');
-var html = fs.readFileSync('./data/raw/in.html', 'utf8');
+var html = fs.readFileSync('./data/raw/main.html', 'utf8');
 
 var uniq = function(a) {
 	return a.sort().filter(function(item, pos, ary) {
