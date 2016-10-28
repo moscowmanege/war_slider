@@ -5,9 +5,6 @@ var async = require('async');
 
 var jquery = fs.readFileSync('./src/js/jquery-2.2.4.min.js', 'utf8');
 
-var main = fs.readFileSync('./data/raw/main.html', 'utf8');
-var opt = fs.readFileSync('./data/raw/opt.html', 'utf8');
-
 var uniq = function(a) {
 	return a.sort().filter(function(item, pos, ary) {
 		return !pos || item != ary[pos - 1];
@@ -87,15 +84,17 @@ var parseFile = function(window, base_path) {
 
 async.parallel({
 	main: function(callback) {
+		var main = fs.readFileSync('./data/raw/main.html', 'utf8');
 		jsdom.env({
 			html: main,
 			src: [jquery],
 			done: callback
 		});
 	},
-	opt: function(callback) {
+	mom: function(callback) {
+		var mom = fs.readFileSync('./data/raw/mom.html', 'utf8');
 		jsdom.env({
-			html: opt,
+			html: mom,
 			src: [jquery],
 			done: callback
 		});
@@ -103,6 +102,6 @@ async.parallel({
 }, function(err, results) {
 	async.parallel([
 		async.apply(parseFile, results.main.window, 'main'),
-		async.apply(parseFile, results.opt.window, 'opt')
+		async.apply(parseFile, results.mom.window, 'mom')
 	]);
 });

@@ -45,7 +45,8 @@ html
 							else
 								- path = path.replace(/.tiff|.tif|.jpeg/g, '.jpg')
 							.swiper-slide
-								.slide-image(style="background-image: url('../../img/" + base_path + '/' + hall + '/' + path + "')")
+								- var hall_path = (base_path == 'main') ? (hall + '/') : ''
+								.slide-image(style="background-image: url('../../img/" + base_path + '/' + hall_path + path + "')")
 								.slide-footer: .footer-inner
 									+label(elem, 'ru')
 									+label(elem, 'en')
