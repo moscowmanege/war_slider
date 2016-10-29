@@ -31,10 +31,10 @@ $(function() {
 		loop: true,
 		runCallbacksOnInit: false,
 
-		preloadImages: false,
-		lazyLoading: true,
-		lazyLoadingInPrevNext: true,
-		lazyLoadingInPrevNextAmount: 2,
+		// preloadImages: false,
+		// lazyLoading: true,
+		// lazyLoadingInPrevNext: true,
+		// lazyLoadingInPrevNextAmount: 2,
 
 		onInit: function(swiper) {
 			$(swiper.slides).filter('.swiper-slide-prev, .swiper-slide-next').addClass('close');
