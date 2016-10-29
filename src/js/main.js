@@ -10,18 +10,13 @@ $(function() {
 		runCallbacksOnInit: false,
 		// touchRatio: 0,
 		// keyboardControl: true,
-		pagination: true,
-		paginationType: 'custom',
-		paginationCustomRender: function(swiper, current, total) {
-			$('.navigate-block').removeClass('active').eq(current - 1).addClass('active');
-		},
 		onSlideChangeStart: function(swiper) {
-			$('.navigate-blocks').addClass('active');
+			$('.navigate-blocks').addClass('active').children('.navigate-block').removeClass('active').eq(swiper.realIndex).addClass('active');
 
 			clearTimeout(navigate_timeout);
 			navigate_timeout = setTimeout(function() {
 				$('.navigate-blocks').removeClass('active');
-			}, 2000);
+			}, 1600);
 		}
 	});
 
