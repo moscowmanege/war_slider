@@ -46,7 +46,8 @@ html
 								- path = path.replace(/.tiff|.tif|.jpeg/g, '.jpg')
 							.swiper-slide
 								- var hall_path = (base_path == 'main') ? (hall + '/') : ''
-								.slide-image(style="background-image: url('../../img/" + base_path + '/' + hall_path + path + "')")
+								//- .slide-image(style="background-image: url('../../img/" + base_path + '/' + hall_path + path + "')")
+								.slide-image.swiper-lazy(data-background='../../img/' + base_path + '/' + hall_path + path)
 								.slide-footer: .footer-inner
 									+label(elem, 'ru')
 									+label(elem, 'en')
