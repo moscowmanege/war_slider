@@ -3,6 +3,8 @@ $(function() {
 	var banner_timeout = null;
 	var navigate_timeout = null;
 
+	var $navigate_blocks = $('.navigate-blocks');
+
 	var swiperV = new Swiper('.swiper-container-v', {
 		slidesPerView: 1,
 		direction: 'vertical',
@@ -11,11 +13,11 @@ $(function() {
 		// touchRatio: 0,
 		// keyboardControl: true,
 		onSlideChangeStart: function(swiper) {
-			$('.navigate-blocks').addClass('active').children('.navigate-block').removeClass('active').eq(swiper.realIndex).addClass('active');
+			$navigate_blocks.addClass('active').children('.navigate-block').removeClass('active').eq(swiper.realIndex).addClass('active');
 
 			clearTimeout(navigate_timeout);
 			navigate_timeout = setTimeout(function() {
-				$('.navigate-blocks').removeClass('active');
+				$navigate_blocks.removeClass('active');
 			}, 1600);
 		}
 	});
@@ -37,13 +39,13 @@ $(function() {
 		// lazyLoadingInPrevNextAmount: 2,
 
 		onInit: function(swiper) {
-			$(swiper.slides).filter('.swiper-slide-prev, .swiper-slide-next').addClass('close');
+			swiper.slides.filter('.swiper-slide-prev, .swiper-slide-next').addClass('close');
 		},
 		onSlideChangeStart: function(swiper) {
-			$(swiper.slides).filter('.swiper-slide-prev, .swiper-slide-active, .swiper-slide-next').addClass('close');
+			swiper.slides.filter('.swiper-slide-prev, .swiper-slide-active, .swiper-slide-next').addClass('close');
 		},
 		onSlideChangeEnd: function(swiper) {
-			$(swiper.slides).filter('.swiper-slide-active').removeClass('close');
+			swiper.slides.filter('.swiper-slide-active').removeClass('close');
 		}
 	});
 
@@ -52,7 +54,7 @@ $(function() {
 			if (Object.keys(buttons).indexOf('' + event.which) != -1) {
 				if (!$('.banner-block').hasClass('out')) {
 					$('.navigate-button.' + buttons[event.which]).addClass('active');
-					$('.navigate-blocks').addClass('force').removeClass('active');
+					$navigate_blocks.addClass('force').removeClass('active');
 				}
 
 				if (!banner_timeout) $('.banner-block').addClass(buttons[event.which]);
@@ -61,7 +63,7 @@ $(function() {
 		.on('keyup', function(event) {
 			if (Object.keys(buttons).indexOf('' + event.which) != -1) {
 				if (!$('.banner-block').hasClass('out')) {
-					$('.navigate-blocks').removeClass('force');
+					$navigate_blocks.removeClass('force');
 				}
 
 				if (!banner_timeout) {
@@ -74,7 +76,7 @@ $(function() {
 				clearTimeout(banner_timeout);
 				banner_timeout = setTimeout(function() {
 					$('.banner-block, .navigate-buttons').removeClass('left right down up out');
-					$('.navigate-blocks').addClass('active');
+					$navigate_blocks.addClass('active');
 
 					swiperH.forEach(function(swiper) { swiper.disableKeyboardControl(); });
 					swiperV.disableKeyboardControl();
