@@ -1,6 +1,9 @@
 @font-face {
 	font-family: 'Voina';
-	src: url('../../fonts/Voina.ttf');
+	src: url('../../fonts/Voina/voina.eot');
+	src: url('../../fonts/Voina/voina.woff') format('woff'), url('../../fonts/Voina/voina.ttf') format('truetype'), url('../../fonts/Voina/voina.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @keyframes move_left {
@@ -28,11 +31,13 @@ html, body
 	// height 1920px
 	height 100%
 	overflow hidden
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 
 body
 	margin 0
 	padding 0
-	cursor url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjbQg61aAAAADUlEQVQYV2P4//8/IwAI/QL/+TZZdwAAAABJRU5ErkJggg=='), none
+	cursor none
 
 .banner-block
 	z-index 999999999
@@ -137,17 +142,18 @@ body
 			padding-bottom 5px
 			&.ru
 				font 18pt/18pt 'Voina'
-				padding-bottom 5px
+				padding-bottom 7px
 				border-bottom 1px solid white
 			&.en
 				padding-top 10px
+				padding-bottom 7px
 				font 12pt/12pt 'Voina'
 		&.active
 			.block-lang
 				background-color white
 				color black
 				&.ru
-					padding-bottom 4px
+					padding-bottom 6px
 					border-bottom 2px solid black
 
 
