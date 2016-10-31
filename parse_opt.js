@@ -98,10 +98,19 @@ async.parallel({
 			src: [jquery],
 			done: callback
 		});
+	},
+	battle: function(callback) {
+		var battle = fs.readFileSync('./data/raw/battle.html', 'utf8');
+		jsdom.env({
+			html: battle,
+			src: [jquery],
+			done: callback
+		});
 	}
 }, function(err, results) {
 	async.parallel([
 		async.apply(parseFile, results.main.window, 'main'),
-		async.apply(parseFile, results.mom.window, 'mom')
+		async.apply(parseFile, results.mom.window, 'mom'),
+		async.apply(parseFile, results.battle.window, 'battle')
 	]);
 });
