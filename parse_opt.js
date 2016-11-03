@@ -83,30 +83,31 @@ var parseFile = function(window, base_path) {
 };
 
 async.parallel({
+
 	main: function(callback) {
-		var main = fs.readFileSync('./data/raw/main.html', 'utf8');
 		jsdom.env({
-			html: main,
+			html: fs.readFileSync('./data/raw/main.html', 'utf8'),
 			src: [jquery],
 			done: callback
 		});
 	},
+
 	mom: function(callback) {
-		var mom = fs.readFileSync('./data/raw/mom.html', 'utf8');
 		jsdom.env({
-			html: mom,
+			html: fs.readFileSync('./data/raw/mom.html', 'utf8'),
 			src: [jquery],
 			done: callback
 		});
 	},
+
 	battle: function(callback) {
-		var battle = fs.readFileSync('./data/raw/battle.html', 'utf8');
 		jsdom.env({
-			html: battle,
+			html: fs.readFileSync('./data/raw/battle.html', 'utf8'),
 			src: [jquery],
 			done: callback
 		});
 	}
+
 }, function(err, results) {
 	async.parallel([
 		async.apply(parseFile, results.main.window, 'main'),
