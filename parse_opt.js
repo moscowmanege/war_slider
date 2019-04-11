@@ -1,5 +1,5 @@
 var fs = require('fs');
-var jsdom = require('jsdom');
+var cheerio = require('cheerio');
 var rimraf = require('rimraf');
 var async = require('async');
 
@@ -13,8 +13,7 @@ var uniq = function(a) {
 
 rimraf.sync('./data/halls/*');
 
-var parseFile = function(window, base_path) {
-	var $ = window.$;
+var parseFile = function($, base_path) {
 
 	var array = $('tr').slice(1).map(function() {
 		var td = $(this).children('td');
@@ -85,33 +84,30 @@ var parseFile = function(window, base_path) {
 async.parallel({
 
 	main: function(callback) {
-		jsdom.env({
-			html: fs.readFileSync('./data/raw/main.html', 'utf8'),
-			src: [jquery],
-			done: callback
-		});
+		var html = fs.readFileSync('./data/raw/main.html', 'utf8');
+		var $ = cheerio.load(html, { decodeEntities: false });
+
+		callback(null, $);
 	},
 
 	mom: function(callback) {
-		jsdom.env({
-			html: fs.readFileSync('./data/raw/mom.html', 'utf8'),
-			src: [jquery],
-			done: callback
-		});
+		var html = fs.readFileSync('./data/raw/mom.html', 'utf8');
+		var $ = cheerio.load(html, { decodeEntities: false });
+
+		callback(null, $);
 	},
 
 	battle: function(callback) {
-		jsdom.env({
-			html: fs.readFileSync('./data/raw/battle.html', 'utf8'),
-			src: [jquery],
-			done: callback
-		});
+		var html = fs.readFileSync('./data/raw/battle.html', 'utf8');
+		var $ = cheerio.load(html, { decodeEntities: false });
+
+		callback(null, $);
 	}
 
 }, function(err, results) {
 	async.parallel([
-		async.apply(parseFile, results.main.window, 'main'),
-		async.apply(parseFile, results.mom.window, 'mom'),
-		async.apply(parseFile, results.battle.window, 'battle')
+		async.apply(parseFile, results.main, 'main'),
+		async.apply(parseFile, results.mom, 'mom'),
+		async.apply(parseFile, results.battle, 'battle')
 	]);
 });

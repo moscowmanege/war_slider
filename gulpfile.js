@@ -1,18 +1,29 @@
 var gulp = require('gulp'),
-		changed = require('gulp-changed'),
+		noop = require('gulp-noop'),
+		cache = require('gulp-cached'),
 		data = require('gulp-data'),
-		foreach = require('gulp-foreach'),
+		each = require('gulp-each'),
 		rename = require('gulp-rename'),
-		jade = require('gulp-jade'),
+		progeny = require('gulp-progeny'),
+		pug = require('gulp-pug'),
 		stylus = require('gulp-stylus'),
-		plumber = require('gulp-plumber'),
+		uglify = require('gulp-uglify'),
+		filter = require('gulp-filter'),
 		autoprefixer = require('gulp-autoprefixer');
 
 var path = require('path'),
 		fs = require('fs'),
 		rimraf = require('rimraf'),
-		colors = require('colors'),
-		runSequence = require('run-sequence');
+		pump = require('pump'),
+		colors = require('ansi-colors'),
+		argv = require('minimist')(process.argv.slice(2)),
+		log = require('fancy-log');
+
+
+// ENV Block
+
+
+var Prod = argv.p || argv.prod;
 
 
 // Paths Block
@@ -23,12 +34,12 @@ var paths = {
 		src: 'src/js/**/*.{js,map}',
 		dest: 'build/js'
 	},
-	stylus: {
-		src: 'src/styl/**/[^_]*.{styl,css}',
+	styles: {
+		src: 'src/styl/**/*.{styl,css}',
 		dest: 'build/css'
 	},
 	html: {
-		src: 'src/index.jade',
+		src: 'src/index.pug',
 		dest: 'build/html'
 	},
 	data: {
@@ -37,30 +48,37 @@ var paths = {
 };
 
 
-// vars Block
-
-
-var Production = false;
-
-
 // Loggers Block
 
 
-var error_logger = function(error) {
-	console.log([
+var errorLogger = function(err) {
+	if (err) log([
 		'',
-		'---------- ERROR MESSAGE START ----------'.bold.red.inverse,
+		colors.bold.inverse.red('---------- ERROR MESSAGE START ----------'),
 		'',
-		(error.name.red + ' in ' + error.plugin.yellow),
+		(colors.red(err.name) + ' in ' + colors.yellow(err.plugin)),
 		'',
-		error.message,
-		'----------- ERROR MESSAGE END -----------'.bold.red.inverse,
+		err.message,
+		colors.bold.inverse.red('----------- ERROR MESSAGE END -----------'),
 		''
 	].join('\n'));
 };
 
-var watch_logger = function(event) {
-	console.log('File ' + event.path.replace(__dirname + '/', '').green + ' was ' + event.type.yellow + ', running tasks...');
+var watchLogger = function(e_type) {
+	return function(path, stats) {
+		log([
+			'File ',
+			colors.green(path.replace(__dirname + '/', '')),
+			' was ',
+			colors.yellow(e_type),
+			', running tasks...'
+		].join(''));
+	};
+};
+
+var cacheClean = function(path) {
+	delete cache.caches.scripts[path];
+	delete cache.caches.styles[path];
 };
 
 
@@ -75,68 +93,75 @@ var getJsonData = function(file) {
 // Tasks Block
 
 
-gulp.task('clean', function(callback) {
+function clean(callback) {
 	return rimraf('build/**', callback);
-});
+}
 
-gulp.task('jade', function() {
-	return gulp.src(paths.data.src)
-		.pipe(plumber(error_logger))
-		.pipe(foreach(function(stream, file){
+function html() {
+	return pump([
+		gulp.src(paths.data.src),
+			each(function(content, file, callback) {
 				var jsonFile = file; // We create this 'jsonFile' variable because the 'file' variable is overwritten on the next gulp.src.
 				var jsonBasename = path.basename(jsonFile.path, path.extname(jsonFile.path));
-				return gulp.src(paths.html.src)
-					.pipe(plumber(error_logger))
-					.pipe(data(getJsonData(jsonFile)))
-					.pipe(jade({ pretty: !Production }))
-					.pipe(rename(function(htmlFile) {
-						htmlFile.basename = jsonBasename;
-					}))
-					.pipe(gulp.dest(paths.html.dest));
+				return pump([
+					gulp.src(paths.html.src),
+						data(getJsonData(jsonFile)),
+						pug({ pretty: !Prod }),
+						rename(function(htmlFile) {
+							htmlFile.basename = jsonBasename;
+						}),
+					gulp.dest(paths.html.dest)
+				], callback);
 			})
-		);
-});
+	], errorLogger);
+}
 
-gulp.task('stylus', function() {
-	return gulp.src(paths.stylus.src)
-		.pipe(plumber(error_logger))
-		.pipe(changed(paths.stylus.dest))
-		.pipe(stylus({ compress: Production }))
-		.pipe(autoprefixer({
-			browsers: ['last 2 versions'],
-			cascade: !Production
-		}))
-		.pipe(gulp.dest(paths.stylus.dest));
-});
+function styles() {
+	return pump([
+		gulp.src(paths.styles.src),
+			cache('styles'),
+			progeny(),
+			filter(['**/*.{styl,css}', '!**/_*.styl']),
+			stylus({ compress: Prod }),
+			autoprefixer({
+				browsers: ['last 12 versions'],
+				cascade: !Prod
+			}),
+		gulp.dest(paths.styles.dest)
+	], errorLogger);
+}
 
-gulp.task('scripts', function() {
-	return gulp.src(paths.scripts.src)
-		.pipe(plumber(error_logger))
-		.pipe(changed(paths.scripts.dest))
-		.pipe(gulp.dest(paths.scripts.dest));
-});
+function scripts() {
+	return pump([
+		gulp.src(paths.scripts.src),
+			cache('scripts'),
+			Prod ? uglify() : noop(),
+		gulp.dest(paths.scripts.dest)
+	], errorLogger);
+}
 
-gulp.task('watch', function() {
-	gulp.watch(paths.scripts.src, ['scripts']).on('change', watch_logger);
-	gulp.watch(paths.stylus.src, ['stylus']).on('change', watch_logger);
-	gulp.watch(paths.html.src, ['jade']).on('change', watch_logger);
-});
+function watch() {
+	gulp.watch(paths.scripts.src, scripts)
+			.on('unlink', cacheClean)
+			.on('change', watchLogger('changed'))
+			.on('add', watchLogger('added'))
+			.on('unlink', watchLogger('removed'));
 
-gulp.task('production', function(callback) {
-	Production = true;
-	callback();
-});
+	gulp.watch(paths.styles.src, styles)
+			.on('unlink', cacheClean)
+			.on('change', watchLogger('changed'))
+			.on('add', watchLogger('added'))
+			.on('unlink', watchLogger('removed'));
+
+	gulp.watch(paths.html.src, html)
+			.on('change', watchLogger('changed'))
+			.on('add', watchLogger('added'))
+			.on('unlink', watchLogger('removed'));
+}
 
 
 // Run Block
 
 
-gulp.task('default', function(callback) {
-	runSequence('clean', ['jade', 'stylus', 'scripts'], callback);
-});
-
-gulp.task('build', function(callback) {
-	runSequence('production', 'clean', ['jade', 'stylus', 'scripts'], callback);
-});
-
-gulp.task('dev', ['watch']);
+exports.build = gulp.series(clean, gulp.parallel(styles, scripts, html));
+exports.default = gulp.series(clean, gulp.parallel(styles, scripts, html), watch);

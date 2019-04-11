@@ -1,5 +1,5 @@
 mixin label(elem, locale)
-	.footer-label(class=locale)
+	.footer-label(class=locale, class=hall == 23 && 'big')
 		.label-title: b= elem[locale].title
 		.label-description= elem[locale].description
 		.label-description-alt= elem[locale].description_alt
@@ -40,14 +40,14 @@ html
 					.swiper-container.swiper-container-h: .swiper-wrapper
 						each elem in block.elems
 							- var path = elem.path
-							if (!/.jpg|.jpeg|.tiff|.tif/g.test(path))
+							if (!/.jpg|.JPG|.jpeg|.tiff|.tif/g.test(path))
 								- path = path + '.jpg'
 							else
 								- path = path.replace(/.tiff|.tif|.jpeg/g, '.jpg')
 							.swiper-slide
 								- var hall_path = (base_path == 'main') ? (hall + '/') : ''
-								.slide-image(style="background-image: url('../../img/" + base_path + '/' + hall_path + path + "')")
-								//- .slide-image.swiper-lazy(data-background='../../img/' + base_path + '/' + hall_path + path)
+								//- .slide-image(style="background-image: url('../../img/" + base_path + '/' + hall_path + path + "')")
+								.slide-image.swiper-lazy(data-background='../../img/' + base_path + '/' + hall_path + encodeURIComponent(path).replace(/%D0%B9/g, '%D0%B8%CC%86'))
 								.slide-footer: .footer-inner
 									+label(elem, 'ru')
 									+label(elem, 'en')

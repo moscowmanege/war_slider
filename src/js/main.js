@@ -3,6 +3,10 @@ $(function() {
 	var banner_timeout = null;
 	var navigate_timeout = null;
 
+	var reload_interval = setInterval(function() {
+		location.reload();
+	}, 1000 * 60 * 20);
+
 	var $navigate_blocks = $('.navigate-blocks');
 
 	var swiperV = new Swiper('.swiper-container-v', {
@@ -33,10 +37,10 @@ $(function() {
 		loop: true,
 		runCallbacksOnInit: false,
 
-		// preloadImages: false,
-		// lazyLoading: true,
-		// lazyLoadingInPrevNext: true,
-		// lazyLoadingInPrevNextAmount: 2,
+		preloadImages: false,
+		lazyLoading: true,
+		lazyLoadingInPrevNext: true,
+		lazyLoadingInPrevNextAmount: 2,
 
 		onInit: function(swiper) {
 			swiper.slides.filter('.swiper-slide-prev, .swiper-slide-next').addClass('close');
@@ -74,6 +78,12 @@ $(function() {
 				}
 
 				clearTimeout(banner_timeout);
+				clearInterval(reload_interval);
+
+				reload_interval = setInterval(function() {
+					location.reload();
+				}, 1000 * 60 * 20);
+
 				banner_timeout = setTimeout(function() {
 					$('.banner-block, .navigate-buttons').removeClass('left right down up out');
 					$navigate_blocks.addClass('active');
